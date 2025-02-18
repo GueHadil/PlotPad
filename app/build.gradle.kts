@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     id("com.google.gms.google-services")
 
+
 }
 
 android {
@@ -36,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.0"
+    }
+
 }
 
 dependencies {
@@ -55,6 +60,16 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     //Firebase
-    implementation("com.google.firebase:firebase-auth:23.2.0")}
+    implementation("com.google.firebase:firebase-auth:23.2.0")
+    //Compose
+    // Jetpack Compose dependencies
+    implementation("androidx.compose.ui:ui:1.7.8")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.7.8")
+
+
+}
+
+
 
 
