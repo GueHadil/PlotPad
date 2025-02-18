@@ -19,5 +19,5 @@ class  MainActivity : AppCompatActivity() {
         }
 
     }
-   fun init (){}
+
 }
