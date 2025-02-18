@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.compose.compiler)
     id("com.google.gms.google-services")
 
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -51,10 +54,19 @@ dependencies {
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.foundation.layout.android)
     implementation(libs.androidx.foundation.layout.android)
+    debugImplementation(libs.androidx.ui.tooling)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     //Firebase
-    implementation("com.google.firebase:firebase-auth:23.2.0")}
+    implementation("com.google.firebase:firebase-auth:23.2.0")
 
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+
+}
+
+kapt {
+    correctErrorTypes = true
+}
 
