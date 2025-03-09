@@ -5,5 +5,11 @@ import com.google.firebase.auth.FirebaseUser
 
 interface FirebaseService {
     fun register (registrationDTO: RegistrationDTO, onSuccess: (FirebaseUser) -> Unit, onFailure: (String) -> Unit){}
-    fun signIn(){}
+
+    fun signIn(
+        email: String,
+        password: String,
+        onSuccess: (FirebaseUser) -> Unit,
+        onFailure: (String) -> Unit
+    )
 }
