@@ -1,3 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.targets
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -15,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.plotpad"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -33,49 +38,79 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            javaParameters.set(true)
+
+        }
     }
+
+
+
+// Configure Compose options
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.0"
     }
 
-}
-
-dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.runtime.android)
-    implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.tooling.preview.android)
-    implementation(libs.androidx.foundation.layout.android)
-    implementation(libs.androidx.foundation.layout.android)
-    implementation(libs.androidx.foundation.layout.android)
-    debugImplementation(libs.androidx.ui.tooling)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    //Firebase
-    implementation("com.google.firebase:firebase-auth:23.2.0")
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-    // Jetpack Compose dependencies
-    implementation("androidx.compose.ui:ui:1.7.8")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.7.8")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.7.8")
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
 
 
-}
 
-kapt {
-    correctErrorTypes = true
-}
+
+    dependencies {
+
+            implementation(libs.androidx.core.ktx)
+            implementation(libs.androidx.appcompat)
+            implementation(libs.material)
+            implementation(libs.androidx.activity)
+            implementation(libs.androidx.constraintlayout)
+            implementation(libs.androidx.runtime.android)
+            implementation(libs.androidx.material3.android)
+            implementation(libs.androidx.ui)
+            implementation(libs.androidx.ui.tooling.preview.android)
+            implementation(libs.androidx.foundation.layout.android)
+            implementation(libs.androidx.foundation.layout.android)
+            implementation(libs.androidx.foundation.layout.android)
+            implementation(libs.junit.junit)
+            debugImplementation(libs.androidx.ui.tooling)
+            testImplementation(libs.junit)
+            androidTestImplementation(libs.androidx.junit)
+            androidTestImplementation(libs.androidx.espresso.core)
+            //Firebase
+            implementation(libs.google.firebase.auth)
+            implementation(libs.hilt.android)
+            kapt(libs.hilt.android.compiler)
+            // Jetpack Compose dependencies
+            implementation(libs.androidx.ui.tooling.preview)
+            debugImplementation(libs.ui.tooling)
+
+            // Testing
+            testImplementation(libs.androidx.core.testing)
+
+            // MockK framework
+            implementation(libs.mockk)
+
+            testImplementation(libs.robolectric)
+
+
+            implementation(kotlin("test"))
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+
+
+        }
+
+        kapt {
+            correctErrorTypes = true
+        }
+    }
 
